@@ -1,53 +1,31 @@
-# Spotify Data Pipeline End-To-End Python Data Engineering Project
-## Project Overview
-This project focuses on creating an end-to-end data engineering pipeline for extracting, transforming, and loading (ETL) Spotify data. The pipeline integrates with the Spotify API, utilizes AWS Lambda for data extraction, employs transformation functions, and stores the processed data in Snowflake. The automation of data extraction and loading processes enhances efficiency and enables seamless analytics.
+# Spotify_ETL
 
-![Spotify ETL AWS AND SNOWFLAKE PROCESS DIAGRAM](Spotify_data_analysis.jpg)
+For this project, the data was collected from Spotify using Spotify’s API and ‘spotipy’ library.
+The data is on top 50 songs in India (ranked weekly)
 
-## Project Components
-**1. Spotify API Integration and Data Extraction**
-* Connects to the Spotify API to extract relevant data.
-* Deploys code on AWS Lambda for efficient and scalable data extraction.
-* Implements triggers for automatic data extraction at * specified intervals.
-**2. Data Transformation**
-* Develops transformation functions to process and structure the extracted data.
-* Builds an automated trigger for seamless execution of transformation processes.
-**3. Data Storage on S3**
-* Stores processed data on AWS S3, ensuring proper organization and accessibility.
-* Utilizes S3 buckets for efficient data storage.
-**4. Loading Data to Snowflake**
-* Creates a Snowflake storage integration for seamless interaction with S3.
-* Establishes stages and file formats in Snowflake for structured data loading.
-* Implements the Snowpipe feature to enable automatic data ingestion into Snowflake.
-* Facilitates analytics by providing a centralized data warehouse in Snowflake.
-## Project Workflow
-**1. Spotify Data Extraction:**
+https://open.spotify.com/playlist/37i9dQZEVXbLZ52XmnySJg
 
-* Integration with Spotify API.
-* Deployment of extraction code on AWS Lambda.
-* Automatic triggering for periodic data extraction.
-## Data Transformation:
+Services used:
+S3, IAM, Glue, Lambda, Athena, EventBridge
 
-* Development of transformation functions for data processing.
-* Automation of transformation processes for seamless execution.
-## Data Storage on S3:
+Process:
+1. Created Spotify developer account to generate API keys.
+2. Assigned roles and policies for the services used thorough IAM.
+3. Created custom python package and generated custom layer to support spotipy library in AWS.
+4. Coded function to extract raw data using Spotify API and ‘spotipy’ python library.
+5. Automated data extraction using lambda triggers and EventBridge for a specified time and store data in ‘raw_data’ folder in S3 bucket.
+6. Executed transform function to convert the raw data into 3 csv files – album, artist, songs in S3
+7. Automated the process of transform function and to copy the transformed files into ‘processed_data’ folder and delete the data from ‘raw_data’ folder.
+8. Utilized Glue crawlers to infer schema and generate tables from the csv files.
+9. Queried the database using Athena to generate insights.
 
-* Proper organization and storage of processed data on AWS S3.
-## Loading Data to Snowflake:
+It was a great experience using API to collect data and then transform this raw data into legible data using AWS. This was a fun project as I was able to work with real time data which keeps on updating.
 
-* Creation of storage integration in Snowflake for S3 interaction.
-* Establishment of stages and file formats for structured loading.
-* Implementation of Snowpipe for automatic data ingestion into Snowflake.
-## Analytics:
 
-* Utilization of Snowflake as a centralized data warehouse for analytics purposes.
-## How to Run the Project
-1. Set up Spotify API credentials for authentication.
-2. Deploy the extraction code on AWS Lambda.
-3. Configure triggers for automatic data extraction.
-4. Develop and deploy transformation functions.
-5. Organize S3 buckets for proper data storage.
-6. Set up Snowflake storage integration, stages, and file formats.
-7. Implement Snowpipe for automatic data ingestion.
-\
-By following these steps, the project can be executed to establish a comprehensive Spotify data pipeline for end-to-end data engineering and analytics.
+Spotify Developer : https://developer.spotify.com 
+
+Python Custom Package : https://www.youtube.com/watch?v=lrEAu75zhNI
+
+## Architecture Diagram
+
+![Architecture Diagram](https://github.com/ParthDodia/Spotify_ETL/assets/88946343/7a7378fb-8478-4501-a271-dc04e76526ae)
